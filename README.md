@@ -41,7 +41,7 @@ pytest tests/ -v          # Phần lớn bài kiểm thử sẽ THẤT BẠI (ch
 Mặc định, lab vẫn chạy với trình nhúng giả lập `_mock_embed` nên **không bắt buộc** cài đặt mô hình nhúng (embedder) thật.
 File `.env` được tự động nạp khi chạy `main.py`. Với các đoạn mã Python (snippet) chạy trực tiếp, hãy dùng lệnh `export` cho các biến môi trường cần thiết hoặc gọi hàm `load_dotenv()` nếu cần.
 
-> **Giai đoạn 2 (so sánh retrieval): đặt `EMBEDDING_PROVIDER=local`** để dùng trình nhúng đa ngữ (mô tả bên dưới). Mock sinh vector xác định nhưng **gần như ngẫu nhiên theo cả chuỗi** — chỉ hợp để chạy unit test, **không phản ánh chất lượng ngữ nghĩa** và không nên dùng để kết luận chiến lược chunking/tiếng Việt nào tốt hơn.
+> **Giai đoạn 2 (so sánh retrieval): đặt `EMBEDDING_PROVIDER=fastembed`** để dùng trình nhúng đa ngữ ONNX nhẹ, không cần PyTorch (hoặc dùng `local` nếu muốn backend Sentence Transformers). Mock sinh vector xác định nhưng **gần như ngẫu nhiên theo cả chuỗi** — chỉ hợp để chạy unit test, **không phản ánh chất lượng ngữ nghĩa** và không nên dùng để kết luận chiến lược chunking/tiếng Việt nào tốt hơn.
 
 ## Tùy Chọn Mô Hình Nhúng (Embedding Backend)
 
@@ -53,6 +53,18 @@ pip install -r requirements.txt
 ```
 
 ### 2) Tùy chọn: Trình nhúng đa ngữ cục bộ (Local multilingual embedder)
+
+Nếu muốn tránh PyTorch/CUDA, dùng backend FastEmbed chạy ONNX trên CPU:
+
+```bash
+pip install -r requirements-fastembed.txt
+EMBEDDING_PROVIDER=fastembed python3 main.py "Câu hỏi cần tìm"
+```
+
+- FastEmbed dùng model `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` dạng ONNX (khoảng 220 MB), không cần PyTorch.
+- Đây là lựa chọn nhẹ được khuyến nghị cho phần so sánh retrieval của lab trên máy cá nhân.
+
+Backend `local` dưới đây vẫn được giữ như lựa chọn tương thích Sentence Transformers/PyTorch:
 
 ```bash
 pip install -r requirements-local.txt

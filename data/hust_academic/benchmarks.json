@@ -1,0 +1,46 @@
+[
+  {
+    "id": "q1",
+    "query": "Các mốc bắt đầu và kết thúc của ba đợt đăng ký chính thức, đăng ký điều chỉnh và đăng ký thêm kỳ 2026.1 là khi nào?",
+    "gold_answer": "Đăng ký chính thức từ 16h00 ngày 22/07/2026 đến 14h00 ngày 03/08/2026; đăng ký điều chỉnh từ 16h00 ngày 03/08/2026 đến 14h00 ngày 15/08/2026; đăng ký thêm từ 16h00 ngày 15/08/2026 đến 16h00 ngày 22/08/2026.",
+    "expected_doc_id": "hust-course-registration-2026-1",
+    "expected_text": "Đăng ký chính thức: Từ 16h00 ngày 22/07/2026",
+    "metadata_filter": null
+  },
+  {
+    "id": "q2",
+    "query": "Sinh viên có được rút học phần trong kỳ hè 2025.3 không?",
+    "gold_answer": "Không. Kỳ hè là kỳ tự nguyện nên không có rút học phần.",
+    "expected_doc_id": "hust-summer-registration-2025-3",
+    "expected_text": "Kỳ hè là kỳ tự nguyện nên sẽ không có Rút học phần",
+    "metadata_filter": null
+  },
+  {
+    "id": "q3",
+    "query": "Nếu học phần thay thế đã có trong danh sách được phê duyệt thì sinh viên có cần làm đơn đăng ký học phần thay thế không?",
+    "gold_answer": "Không cần làm đơn đăng ký học phần thay thế. Sau khi học xong, sinh viên vẫn phải làm đơn công nhận học phần tương đương hoặc thay thế theo hướng dẫn.",
+    "expected_doc_id": "hust-equivalent-course-process",
+    "expected_text": "không cần làm đơn xin ĐĂNG KÝ HỌC PHẦN THAY THẾ",
+    "metadata_filter": null
+  },
+  {
+    "id": "q4",
+    "query": "Sinh viên đăng ký bổ sung vào lớp Toán đã đầy bằng cách nào và nhóm nào được ưu tiên?",
+    "gold_answer": "Sinh viên điền biểu mẫu 'Đơn xin đăng ký vào lớp đầy' trên hệ thống QLDT. Khoa Toán - Tin ưu tiên xem xét sinh viên K67 trở về trước.",
+    "expected_doc_id": "hust-full-math-class-registration",
+    "expected_text": "Đơn xin đăng ký vào lớp đầy",
+    "metadata_filter": {
+      "category": "full-class-registration"
+    }
+  },
+  {
+    "id": "q5",
+    "query": "Trong kỳ 2026.1, sinh viên đại học bình thường thuộc chương trình chuẩn được đăng ký tối đa bao nhiêu tín chỉ?",
+    "gold_answer": "Tối đa 24 tín chỉ; mức tối thiểu là 12 tín chỉ.",
+    "expected_doc_id": "hust-course-registration-2026-1",
+    "expected_text": "Tối thiểu 12 TC – Tối đa 24 TC",
+    "metadata_filter": {
+      "audience": "student"
+    }
+  }
+]

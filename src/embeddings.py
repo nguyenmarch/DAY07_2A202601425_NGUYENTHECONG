@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import hashlib
 import math
+import warnings
 
 # Multilingual model suitable for the Vietnamese corpora used in this Lab.
 # The local backend remains optional; required checkpoints use MockEmbedder.
 LOCAL_EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+FASTEMBED_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 OPENAI_EMBEDDING_MODEL = "text-embedding-3-small"
 EMBEDDING_PROVIDER_ENV = "EMBEDDING_PROVIDER"
 
@@ -43,6 +45,35 @@ class LocalEmbedder:
         if hasattr(embedding, "tolist"):
             return embedding.tolist()
         return [float(value) for value in embedding]
+
+
+class FastEmbedder:
+    """Lightweight ONNX Runtime-backed multilingual embedder (no PyTorch)."""
+
+    def __init__(self, model_name: str = FASTEMBED_MODEL) -> None:
+        from fastembed import TextEmbedding
+
+        self.model_name = model_name
+        self._backend_name = f"fastembed:{model_name}"
+        # FastEmbed 0.8 warns that this model now uses mean pooling. That is the
+        # intended behaviour for this retrieval backend, so avoid repeating the
+        # compatibility warning on every lab run.
+        with warnings.catch_warnings():
+            warnings.filterwarnings(
+                "ignore",
+                message=r"The model .* now uses mean pooling instead of CLS embedding.*",
+                category=UserWarning,
+            )
+            self.model = TextEmbedding(model_name=model_name)
+
+    def __call__(self, text: str) -> list[float]:
+        embedding = next(iter(self.model.embed([text])))
+        if hasattr(embedding, "tolist"):
+            values = [float(value) for value in embedding.tolist()]
+        else:
+            values = [float(value) for value in embedding]
+        norm = math.sqrt(sum(value * value for value in values)) or 1.0
+        return [value / norm for value in values]
 
 
 class OpenAIEmbedder:

@@ -99,7 +99,7 @@ Mỗi thành viên **tự chọn chiến lược riêng** để thử nghiệm t
 
 **Bước 1 — Đường cơ sở (Baseline):** Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu. Ghi lại kết quả.
 
-> **Dùng embedder thật để so sánh có ý nghĩa:** đặt `EMBEDDING_PROVIDER=local` (xem README, mục *Tùy Chọn Mô Hình Nhúng*). Trình nhúng giả lập (mock) chỉ dùng cho unit test và cho điểm gần như ngẫu nhiên — **không** phản ánh chất lượng ngữ nghĩa tiếng Việt nên đừng dùng mock để kết luận chiến lược nào tốt hơn.
+> **Dùng embedder thật để so sánh có ý nghĩa:** đặt `EMBEDDING_PROVIDER=fastembed` để chạy model đa ngữ bằng ONNX không cần PyTorch (hoặc `local` nếu đã cài Sentence Transformers). Trình nhúng giả lập (mock) chỉ dùng cho unit test và cho điểm gần như ngẫu nhiên — **không** phản ánh chất lượng ngữ nghĩa tiếng Việt nên đừng dùng mock để kết luận chiến lược nào tốt hơn.
 
 **Bước 2 — Chọn hoặc thiết kế chiến lược của bạn:**
 - Dùng 1 trong 3 chiến lược có sẵn (built-in strategies) với tham số tối ưu, HOẶC

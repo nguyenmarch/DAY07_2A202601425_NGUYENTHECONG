@@ -1,0 +1,2 @@
+# Lightweight multilingual embeddings through ONNX Runtime; no PyTorch/CUDA.
+fastembed==0.8.0

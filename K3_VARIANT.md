@@ -12,4 +12,4 @@ K3 dùng chung cam kết mã nguồn cốt lõi (core coding contract) với K4,
 
 Thư mục `data/k3_university/` có dữ liệu khởi động nhỏ (kèm `sources.csv` mẫu — thay bằng nguồn thật); nhóm vẫn cần bổ sung tập tài liệu (corpus) 5–10 tài liệu theo yêu cầu Lab.
 
-Nạp dữ liệu bằng `build_knowledge_base()` trong `ingest.py` (parse YAML front matter → chunk → gắn `doc_id`+metadata → nạp store). Ở Giai đoạn 2 đặt `EMBEDDING_PROVIDER=local` để so sánh retrieval có ý nghĩa (mock chỉ dùng cho unit test).
+Nạp dữ liệu bằng `build_knowledge_base()` trong `ingest.py` (parse YAML front matter → chunk → gắn `doc_id`+metadata → nạp store). Ở Giai đoạn 2 đặt `EMBEDDING_PROVIDER=fastembed` để dùng model đa ngữ ONNX nhẹ (hoặc `local` nếu đã cài Sentence Transformers); mock chỉ dùng cho unit test.
